@@ -1,0 +1,82 @@
+-- Get the player
+local player = game:GetService("Players").LocalPlayer
+
+-- Get the player's humanoid and original hitbox size
+local humanoid = player.Character.Humanoid
+local originalSize = humanoid:GetExtentsSize()
+
+-- Set default hitbox size
+local defaultSize = Vector3.new(5, 10, 5)
+
+-- Create configuration menu
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.new(1, 1, 1)
+frame.BorderSizePixel = 2
+frame.Parent = gui
+
+local label = Instance.new("TextLabel")
+label.Text = "Hitbox Size"
+label.Position = UDim2.new(0, 0, 0, 10)
+label.Size = UDim2.new(1, 0, 0, 20)
+label.TextSize = 18
+label.Parent = frame
+
+local xLabel = Instance.new("TextLabel")
+xLabel.Text = "X:"
+xLabel.Position = UDim2.new(0, 10, 0, 40)
+xLabel.Size = UDim2.new(0, 20, 0, 20)
+xLabel.TextSize = 14
+xLabel.Parent = frame
+
+local xTextBox = Instance.new("TextBox")
+xTextBox.Text = tostring(defaultSize.X)
+xTextBox.Position = UDim2.new(0, 30, 0, 40)
+xTextBox.Size = UDim2.new(0, 50, 0, 20)
+xTextBox.Parent = frame
+
+local yLabel = Instance.new("TextLabel")
+yLabel.Text = "Y:"
+yLabel.Position = UDim2.new(0, 90, 0, 40)
+yLabel.Size = UDim2.new(0, 20, 0, 20)
+yLabel.TextSize = 14
+yLabel.Parent = frame
+
+local yTextBox = Instance.new("TextBox")
+yTextBox.Text = tostring(defaultSize.Y)
+yTextBox.Position = UDim2.new(0, 110, 0, 40)
+yTextBox.Size = UDim2.new(0, 50, 0, 20)
+yTextBox.Parent = frame
+
+local zLabel = Instance.new("TextLabel")
+zLabel.Text = "Z:"
+zLabel.Position = UDim2.new(0, 170, 0, 40)
+zLabel.Size = UDim2.new(0, 20, 0, 20)
+zLabel.TextSize = 14
+zLabel.Parent = frame
+
+local zTextBox = Instance.new("TextBox")
+zTextBox.Text = tostring(defaultSize.Z)
+zTextBox.Position = UDim2.new(0, 190, 0, 40)
+zTextBox.Size = UDim2.new(0, 50, 0, 20)
+zTextBox.Parent = frame
+
+-- Function to update hitbox size
+local function updateHitboxSize()
+    local newSize = Vector3.new(
+        tonumber(xTextBox.Text),
+        tonumber(yTextBox.Text),
+        tonumber(zTextBox.Text)
+    )
+    humanoid:SetExtentsSize(newSize)
+end
+
+-- Add a button to apply changes
+local button = Instance.new("TextButton")
+button.Text = "Apply"
+button.Position = UDim2.new(0.5, -50, 0.75, -10)
+button.Size = UDim2.new(0
